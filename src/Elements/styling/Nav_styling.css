@@ -1,0 +1,122 @@
+/**/
+
+/*
+
+Pinned message styling
+
+*/
+.pinned{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.pinned p{
+    width: 65%;
+    justify-self: center;
+    font-weight: bold;
+    font-size: 160%;
+    
+}
+
+/*
+
+General Navbar Layout
+
+*/
+.nav-background{
+    backdrop-filter: saturate(180%) blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.navbar{
+    background: rgba(5, 17, 70, 0.7);
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);*/
+
+}
+
+.page{
+    margin: 0px 15px;
+    text-decoration: none;
+    font-size: 110%;
+    color: whitesmoke;
+    padding-bottom: 10px;
+    font-family:Verdana;
+}
+
+.dropdown{
+    display: inline-block;
+}
+
+.nav_logo{
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav_right{
+    float: right;
+}
+
+
+.dropdown-content{
+    position: absolute;
+
+    margin-top: 10px;
+    margin-left: 15px;
+    display: none;
+    width: 210px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+}
+
+.dropdown-content a{
+    float: none;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    margin: 5px;
+    border-radius: 2px;
+    color: black;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: #112257;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+.web_name{
+    color: whitesmoke;
+    transform: translateY(15%);
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.nav_vert{
+    width: 1px;
+    height: 12px;
+    background: rgb(167, 165, 165);
+    display: inline-block;
+    align-items: center;
+}
+
+.horizontal_bar{
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+}

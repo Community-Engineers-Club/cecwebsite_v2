@@ -1,0 +1,48 @@
+/* */
+
+/* Text and title module styling */
+.title_module{
+    margin: 10px;
+    width: 100%;
+    justify-self: center;
+    text-align: center;
+    background-color: rgb(245, 245, 250);
+    color: rgb(23, 21, 71);
+    padding: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 120%;
+    border: 2px solid lightgray;
+}
+.text_module{
+    margin: 10px;
+    max-width: 900px;
+    width: 80%;
+    justify-self: center;
+}
+
+.tm_title{
+    background: rgb(245, 245, 250);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: rgb(230, 198, 83);
+    border-bottom: 1.5px solid rgb(247, 222, 129);
+
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 140%;
+}
+
+.tm_content{
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid rgb(247, 222, 129);
+}
+
+.tm_textonly{
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

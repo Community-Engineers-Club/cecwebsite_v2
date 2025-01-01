@@ -1,0 +1,30 @@
+/* */
+
+.home_body{
+    background: rgb(22, 27, 34);
+    padding: 20px 0px;
+    position: relative;
+}
+
+
+
+.introduction{
+    width: 90%;
+    max-width: 900px;
+    justify-self: center;
+    color: white;
+}
+
+.introduction h2{
+    font-size: 200%;
+}
+
+
+.glitchBar{
+    margin-top: -20px;
+    height: 100%;
+    width: 2px;
+    background: rgb(227, 237, 125);
+    position: absolute;
+    z-index: 1;
+}
