@@ -1,13 +1,16 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { counter_3D_conversion } from '../Pages/calculator';
+import Firestore_Listener from '../Firestore_Listener';
 
 const ModelViewer = () => {
-  const containerRef = useRef(null);
-  const [sliderValue, setSliderValue] = useState(20);
+
+  const { counterVal } = Firestore_Listener("arduino/post", "user20@gmail.com", "password5");
 
     // Refs to store the scene, camera, renderer, controls, and adjustable part
+    const containerRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
     const rendererRef = useRef(null);
@@ -53,22 +56,6 @@ const ModelViewer = () => {
         console.error('Error loading model:', error);
       }
     );
-/*
-    // Animation
-    const animate = () => {
-      requestAnimationFrame(animate);
-      controls.update();
-
-      // Move adjustable part position along y-axis based on slider value
-      if (adjustablePartRef.current) {
-        adjustablePartRef.current.position.y = sliderValue;
-        console.log("Update: ", sliderValue)
-      }
-
-      renderer.render(scene, camera); //Render
-    };
-
-    animate(); //Call animate function*/
 
     return () => {
       if (renderer) renderer.dispose();
@@ -78,13 +65,16 @@ const ModelViewer = () => {
     };
   }, []); // Empty dependency >> so the code only runs once
 
+
   // Update the adjustable part position when slider value changes
   useEffect(() => {
+    let slider = counter_3D_conversion(parseInt(counterVal));
     const { current: adjustablePart } = adjustablePartRef;
     if (adjustablePart) {
-      adjustablePart.position.y = sliderValue;
+      adjustablePart.position.y = slider;
     }
-  }, [sliderValue]); // This effect runs whenever sliderValue change
+console.log("rendered. Counter: ", counterVal, "slider: ", slider);
+  }, [counterVal]); // This effect runs whenever counterVal change
 
   // Animation loop (runs continuously)
   useEffect(() => {
@@ -103,29 +93,10 @@ const ModelViewer = () => {
     animate();
   }, []); // This effect only runs once when the component mounts
 
-
-  const handleSliderChange = (e) => {
-    setSliderValue(parseFloat(e.target.value));
-    console.log(e.target.value)
-  };
-
   
 
   return (
     <>
-    <div>
-        <input
-        type="range"
-        min="20"
-        max="40"
-        step="1"
-        value={sliderValue}
-        onChange={handleSliderChange}
-      />
-      <p
-      >Slider value: {sliderValue}</p>
-    </div>
-    
     <div>
 
       <div ref={containerRef} 
@@ -135,7 +106,6 @@ const ModelViewer = () => {
       justifyContent: 'center',
       alignItems: 'center'}}/>
 
-      
     </div>
     </>
   );

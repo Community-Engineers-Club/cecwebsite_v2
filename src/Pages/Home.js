@@ -21,7 +21,6 @@ function Home() {
 
   return (
     <>
-    <title>App</title>
     <Navbar/>
 
 <div style={{background: "linear-gradient(to right, rgb(244, 5, 5), rgb(244, 5, 128))", padding: "5px",

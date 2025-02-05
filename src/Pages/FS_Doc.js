@@ -8,8 +8,8 @@ npm start
 
 */
 
-import React from 'react';
-import { useParams } from "react-router-dom";
+import React, { useState, useCallback, useEffect } from 'react';
+import { data, useParams } from "react-router-dom";
 import '../App.css';
 import './styling/FS_Doc.css';
 import Navbar from '../Elements/Navbar.js';
@@ -18,7 +18,9 @@ import Doc_Module from '../Elements/Doc_Module.js'
 import Module from '../Elements/Module.js';
 import ModelViewer from '../Elements/ModelViewer.js';
 import Firestore_Listener from '../Firestore_Listener.js';
-import Graph from '../Elements/Graph.js';
+import GoogleMaps from '../Elements/GoogleMaps.tsx';
+import { parseCSV } from '../Elements/dataAnalysis.js';
+import { pool_calculator } from './calculator.js';
 
 
 function FS_Doc() {
@@ -27,13 +29,10 @@ function FS_Doc() {
   const { pageId } = useParams();
 
 
-  // Firestore Database
-  const docPath1 = "arduino/post";
-  const docPath2 = "arduino/measurements";
-  // Custom hooks (of interest)
-  const { counterVal, lastUpdateVal, nextUpdateVal, lastMemoryClearVal, nextMemoryClearVal } = Firestore_Listener(docPath1, "user20@gmail.com", "password5");
-  const { tempArray, humidArray } = Firestore_Listener(docPath2, "user20@gmail.com", "password5");
 
+  // Custom hooks (of interest)
+  //const counterVal = 10;
+  //const { tempArray, humidArray } = Firestore_Listener(docPath2, "user20@gmail.com", "password5");
 
 
   const Doc = () => {
@@ -54,31 +53,57 @@ function FS_Doc() {
     </>)
   }
 
-  const Overview = () => {
+
+async function load_flooding(counter) {
+    /*
+    Algorithm here:
+    1. parse pools + of points from downloaded CSV file. Now they should be arrays.
+    2. Determine if flooding in pools 2D array (send to calculator.js). Returns new array og 2D pools
+    3. Send to <GoogleMaps/> to display markers for 1D array and polygons for 2D array of pools
+    4. Done!
+
+    Algorithm 3D map:
+    See ModelViewer.js. Essentially translates counter to slidervalue and updates automatically.
+    counterFactor needs tinkering with for precision.
+    */
+
+    // Step 1
+    const relmins = await parseCSV("/Models/test_min.csv"); // 1D array
+    const pools = await parseCSV("/Models/test_pool.csv"); // 2D array
+
+    // Step 2
+    const flooded_points = await pool_calculator(pools, counter) // 2D Array
+
+    // Step 3
+
+}
+
+  // Overview of flooding
+  const  Overview = () => {
+
+    // PART 1
+    const { counterVal, lastUpdateVal, nextUpdateVal } = Firestore_Listener("arduino/post", "user20@gmail.com", "password5");
+    // NOTE TO SELF: COMBINE INTO ONE?
+    const { lastTempVal, lastHumidVal } = Firestore_Listener("arduino/measurements", "user20@gmail.com", "password5");
+
+    // PART 2
+
     return(
       <>
       <Module type="text">Hello there.<br/><br/>Important information:
       
       <br/><br/>Counter: {counterVal}
-      <br/><br/>lastUpdate: {lastUpdateVal}
-
-      <br/><br/>nextUpdate: {nextUpdateVal}
-      <br/><br/>lastMemoryClear: {lastMemoryClearVal}
-      <br/><br/>nextMemoryClear: {nextMemoryClearVal}
-
-      <ul>
-          {tempArray.map((temp, index) => (
-            <li key={index}>{index}: {temp}</li>
-          ))}
-       </ul>
-
-        {/* Graph testing */}
-        <Graph array= {tempArray} type="Temperature"/>
-
+      <br/><br/>Last Update Time: {lastUpdateVal}
+      <br/><br/>Next Update Time: {nextUpdateVal}
+      <br/><br/>Last Humidity Measure: {lastHumidVal}%
+      <br/><br/>Last Temperature Measure: {lastTempVal}°C
   
       </Module>
       <br/><br/>
       <Module type="main" title="Statistics">Info</Module>
+
+      <p>Here is a map?:</p>
+      <GoogleMaps/>
       </>
     )
   }
@@ -140,13 +165,13 @@ function FS_Doc() {
   return (
     <>
     <head>
-    <title>Home</title>
     </head>
     <Navbar pinned="true">{pageId}</Navbar>
     {renderModule()}
+
     <Footer/>
     </>
   );
-}
+};
 
 export default FS_Doc;

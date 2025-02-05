@@ -3,6 +3,24 @@ import React from 'react';
 import './styling/Nav_styling.css';
 import '../App.css';
 
+  // Subheader renderer
+  function render_subheader(page_link) {
+    switch(page_link){
+      case "overview":
+        return "Overview";
+      case "documentation":
+        return "Documentation"
+      case "3dmap":
+        return "3D Map"
+      case "3dmap-warning":
+        return "3D Map: Warning"
+      case "history":
+        return "History"
+      default:
+        return "Home"
+    }
+}
+
 //Navbar HTML Code
 function Navbar(props){
 
@@ -14,7 +32,11 @@ props.pinned (if pinned message)
 */
 
 return(
+
 <>
+<head>
+    <title>{render_subheader(props.children)} | CEC </title>
+</head>
     <div className="nav-background">
     <nav className="navbar">
     
@@ -50,7 +72,7 @@ return(
     /* Add pinned segment if pinned == true*/
     props.pinned === "true" &&
         <section className="pinned">
-            <p>{props.children}</p>
+            <p>{render_subheader(props.children)}</p>
         </section> }
 
     </div>
