@@ -2,17 +2,16 @@
 
 /* Text and title module styling */
 .title_module{
-    margin: 10px;
     width: 100%;
     justify-self: center;
     text-align: center;
     background-color: rgb(245, 245, 250);
     color: rgb(23, 21, 71);
-    padding: 10px;
     padding-bottom: 20px;
     padding-top: 20px;
     font-size: 120%;
-    border: 2px solid lightgray;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
 }
 .text_module{
     margin: 10px;

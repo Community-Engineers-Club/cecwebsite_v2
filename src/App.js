@@ -12,14 +12,14 @@ npm start
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import './App.css';
-import Home from './Pages/Home.js'
+import Home from './pages/Home.js'
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/analytics';
-import FS_Doc from './Pages/FS_Doc.js';
-import { AuthProvider } from './contexts/authContext/AuthProvider.js';
-import GoogleMaps from './Elements/GoogleMaps.tsx';
-import Editor from './Pages/login/Editor.js';
+import FS_Doc from './pages/FS_Doc.js';
+import { AuthProvider } from './authContext/AuthProvider.js';
+import GoogleMaps from './elements/GoogleMaps.tsx';
+import Editor from './pages/admin.js';
 
 
 function App() {

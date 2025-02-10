@@ -16,6 +16,8 @@ import '../App.css';
         return "3D Map: Warning"
       case "history":
         return "History"
+      case "predict":
+        return "Flooding Prediction Calculator"
       default:
         return "Home"
     }
@@ -47,26 +49,22 @@ return(
 
     <div className="nav_right">
     <a className="page" href="/">Home</a>
-    <div className="nav_vert"></div>
         <div className="dropdown">
-            <a className="page" href="/advisorysystem/overview">Flood Advisory System &#x25BE;</a>
+            <a className="page">Flood Advisory System &#x25BE;</a>
             <div className="dropdown-content">
                 <a href="/advisorysystem/overview">Overview</a>
+                <a href="/advisorysystem/predict">Flooding Prediction Calculator</a>
                 <a href="/advisorysystem/3dmap-warning">3D Map</a>
-                <a href="/advisorysystem/history">History</a>
                 <div style={{width: "90%", height: "1px", background: "lightgray", justifySelf: "center"}}></div>
                 <a href="/advisorysystem/documentation">Documentation</a>
+                <a href="/editor">Admin Panel</a>
             </div>
         </div>
-            <div className="nav_vert"></div>
-            <a className="page" href="/#about_link">About</a>
-            <div className="nav_vert"></div>
             <a className="page" href="#footer">Join</a>
 
 
     </div>
     </nav>
-    <div className="horizontal_bar"></div>
 
     {
     /* Add pinned segment if pinned == true*/

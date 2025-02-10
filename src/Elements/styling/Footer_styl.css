@@ -1,47 +1,16 @@
 
 #footer{
     padding: 30px;
-    background: rgb(251, 222, 112);
-}
-
-.foot_left{
-    justify-items: center;
-    margin-right: 5%;
-    margin-bottom: 10px;
-}
-
-.foot_left p{
-    font-size: 120%;
-    font-weight: bold;
-}
-
-.foot_left img{
-}
-
-.foot_right{
-}
-
-.foot_top{
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.foot_bottom{
+    background: rgb(12, 24, 56);
     justify-self: center;
+    border-radius: 10px;
+    color: lightgray;
 }
 
-.groupme{
-    width: 70%;
-    aspect-ratio: 1/1;
-    display: block;
-}
 
 .footerbar{
-    width: 80%;
-    justify-self: center;
-    height: 1.5px;
-    background: black;
+    width: 78%;
+    justify-self: right;
+    height: 1px;
+    background: lightgray;
 }

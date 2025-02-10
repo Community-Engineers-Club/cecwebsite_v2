@@ -19,7 +19,6 @@
     font-size: 200%;
 }
 
-
 .glitchBar{
     margin-top: -20px;
     height: 100%;
@@ -28,3 +27,23 @@
     position: absolute;
     z-index: 1;
 }
+
+.stat_grid{
+    display: grid;
+    grid: 150px / auto auto auto;
+}
+
+.stat_grid > div{
+    text-align: center;
+}
+
+.bignumber{
+    font-size: 200%;
+    color: rgb(0, 119, 255);
+    font-weight: bold;
+}
+
+.link{
+    color: rgb(0, 119, 255);
+}
+

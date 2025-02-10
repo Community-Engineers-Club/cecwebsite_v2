@@ -2,12 +2,19 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { counter_3D_conversion } from '../Pages/calculator';
-import Firestore_Listener from '../Firestore_Listener';
+import { counter_3D_conversion } from '../functions/calculator';
+import Firestore_Listener from '../functions/Firestore_Listener';
 
-const ModelViewer = () => {
+const ModelViewer = ( {custom_counter} ) => {
 
-  const { counterVal } = Firestore_Listener("arduino/post", "user20@gmail.com", "password5");
+  let counterVal;
+
+  if (custom_counter) {
+    counterVal = custom_counter;
+    console.log("Custom counter! ", custom_counter);
+  } else {
+    counterVal = Firestore_Listener("arduino/post").counterVal;
+  }
 
     // Refs to store the scene, camera, renderer, controls, and adjustable part
     const containerRef = useRef(null);
