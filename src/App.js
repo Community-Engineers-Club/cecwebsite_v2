@@ -33,9 +33,8 @@ function App() {
       <Routes>
         <Route index element={<Home/>}/>
         <Route path ="/advisorysystem/:pageId" element={<FS_Doc/>}/>
-        <Route path ="*" element={<b>404 page error. Page does not exist!</b>}/>
+        <Route path ="*" element={<FS_Doc/>}/>
         <Route path ="/map" element={<GoogleMaps/>}/>
-        <Route path ="/editor" element={<Editor/>}/>
       </Routes>
       </AuthProvider>
     </BrowserRouter>

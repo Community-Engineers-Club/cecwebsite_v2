@@ -7,6 +7,7 @@ import { getWeather } from '../functions/weather.js';
 import Graph from '../elements/components/Graph.js';
 import { getCounter } from '../functions/Firestore_Listener.js';
 import './styling/predict.css'
+import Module from '../elements/Module.js';
 
 const  Predict = () => {
 
@@ -17,6 +18,10 @@ const  Predict = () => {
     const [display2D, setDisplay2D] = useState(false);
     const [display3D, setDisplay3D] = useState(false);
     const [displaying, setDisplaying] = useState(false);
+
+    // Mode
+    const [mode, setMode] = useState("normal");
+    const [userCounter, setUserCounter] = useState(0);
 
 
     // Variables
@@ -105,11 +110,18 @@ const  Predict = () => {
 
     }
 
+    function btnLogic() {
+      if ((rainInterval != '' && mode == "normal") || (mode == "experiment"))
+        return true;
+    }
+
     // display predicted results once 'update' button is pressed
     function displayPrediction(e) {
       e.preventDefault()
 
       setDisplaying(false); // stop displaying as options are changed
+
+      if (mode == "normal") { // normal
 
       let time_interval; // time interval between each measurement: % of hour
       let precipitationArray; // location of precipitation array
@@ -148,6 +160,7 @@ const  Predict = () => {
           counterReduction += 1;
           timePassed = 0; // reset timePassed
         }
+        
       }
 
       console.log("accum rainfall: ", accumulatedRainfall, "counter reduction: ", counterReduction)
@@ -163,6 +176,10 @@ const  Predict = () => {
       console.log("temp rain data: ", tempGraphData)
       
       console.log("whole counter: ", whole_counter, "sim counter: ", sim_counter)
+    } else { // mode == experiment
+      setWholeCounter(userCounter)
+      setAccumRain(userCounter * 0.08422256);
+    }
     }
 
     // Set dislay option for google maps + 3D map
@@ -196,6 +213,11 @@ const  Predict = () => {
     return(
     <>
     <div style={{marginTop: "20px", marginBottom: "20px"}}>
+
+      <Module type="directory-fas"/>
+
+      <br/>
+
       <div className ="centerDiv_gradient">
         <div className="centerDiv">
         <h1 style={{marginBottom: "10px"}}>About this tool</h1>
@@ -216,18 +238,51 @@ const  Predict = () => {
           <b>Please select a precipitation frequency type:</b>
           <p>1. Every 15 minutes: predicted precipitation for every 15 minutes from current local time in Scarsdale, NY up until 3 <b>hours</b> later.<br/></p>
           <p>1. Hourly: predicted precipitation every hour from the current local time in Scarsdale, NY up until 3 <b>days</b> later.<br/></p>
+          <br/>
+          <p>Also note: use normal mode to achieve this. If you want to try setting the counter itself and display results, change the mode to 'Set Counter'.</p>
           </div>
 
           <br/><br/>
+          <select onChange={(e) => {
+            setMode(e.target.value)
+            setRainInterval('');
+            setSliderMax(0);
+            setSliderValue(0);
+            setSliderText('');
+            }}>
+            <option selected value="normal">Normal</option>
+            <option value="experiment">Set Counter</option>
+          </select>
+
+          <br/><br/>
+          {mode == "experiment" && <input
+          style={{width: "40px", height:"20px"}}
+          required
+          type="number"
+          value={userCounter}
+          onChange={(e) => {
+
+            if (e.target.value >= 0 && e.target.value <= 70)
+              setUserCounter(e.target.value);
+          
+          }}
+          />}
+
+          {mode == "normal" &&
           <select onChange={(e) => { precipOptionChange(e.target.value) }}>
             <option selected disabled value="">Choose option</option>
             <option value="15min">Every 15 minutes</option>
             <option value="hourly">Hourly</option>
           </select>
 
+          }
+
           <br/><br/>
           <form onSubmit={(e) => displayPrediction(e)}>
-          <input 
+          
+          {mode == "normal" &&
+          <>
+          <input
           
           style={{width: "40%", height:"20px"}}
           type="range"
@@ -242,18 +297,22 @@ const  Predict = () => {
           <p>until {sliderText}</p>
           <br/>
 
-          <button
+          </>
+          }
+
+          { btnLogic() && <button
           style={{padding: "10px", fontWeight: "bold"}}
 
         type="submit"
         className={`w-full px-4 py-2 text-white font-medium rounded-lg ${userLoggedIn ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl transition duration-300'}`}
         >
         Confirm
-        </button>  
+        </button>  }
         </form>
 
         <br/>
         <p>Total accumulated rainfall: {accumRain} inches</p>
+        <p>Simulated counter value: {wholeCounter}</p>
         <i>Source: Open-Meteo Free Weather API</i>
 
 
@@ -263,7 +322,7 @@ const  Predict = () => {
       {/*<p>Whole counter: {wholeCounter}</p>
       <p>Simulated counter: {simulatedCounter}</p>*/}
 
-      <Graph data={rainData}/>
+      {mode == "normal" && <Graph data={rainData}/>}
       {/*loaded && <GoogleMaps counter={wholeCounter}/>*/}
 
       <div className="center_gradient">
@@ -272,6 +331,8 @@ const  Predict = () => {
           <br/>
           <p>Note that if you want to update precipitation data above, it is easier if you hide the maps below.
             They will also hide automatically if you press the 'update' button above.</p>
+            <br/><br/>
+            <p>Recommendations: Use the 2D Google Maps to learn of wet areas. See the 3D map for significant areas of flooding.</p>
 
           <br/>
           <form onSubmit={(e) => displayMap(e)}>
@@ -281,6 +342,7 @@ const  Predict = () => {
               <option value="3d">3D Map</option>
               <option value="both">Both</option>
             </select>
+
             <br/><br/>
             <button
             style={{padding: "10px", fontWeight: "bold"}}

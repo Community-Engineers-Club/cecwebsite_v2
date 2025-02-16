@@ -4,16 +4,7 @@ import { local_signInWithEmailAndPassword, signOut } from '../authContext/auth.j
 import { getAuth } from "firebase/auth";
 import { db } from "../Firebase.js";
 import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore"; 
-import { main, reducePools } from "../functions/dataAnalysis.js";
-
-/* Login Credentials:
-
-Email, Password
-testin7583cec@gmail.com, it984465 ** ADMIN
-user20@gmail.com, password5
-admin10@gmail.com, password5
-
-*/
+import Module from "../elements/Module.js";
 
 const admin_email = "testin7583cec@gmail.com";
 const admin_user = "admin"; // admin username works as well as the email
@@ -108,7 +99,7 @@ async function updateValues(e) {
     try{
         await updateDoc(doc(db, "arduino/post"), {
             counter: parseInt(tempCounter),
-            lastUpdate: Timestamp.fromDate(new Date()) // Updates with current time
+            //lastUpdate: Timestamp.fromDate(new Date()) // Updates with current time
         })
     // Success
     getValues()
@@ -179,6 +170,7 @@ className="space-y-5"
 function otherAccount() {
     return(
         <>
+        <Module type="directory-fas"/>
             <p>Unfortunately, this is not an admin account and you do not have clearence. Try logging out and logging into an admin account.</p>
         <form
         onSubmit={logOut}
@@ -206,6 +198,7 @@ function otherAccount() {
 function Login(){
 return(
 <>
+<Module type="directory-fas"/>
 <p>Enter login credentials. Only admin accounts have access.</p>
 <form
 onSubmit={onSubmit}

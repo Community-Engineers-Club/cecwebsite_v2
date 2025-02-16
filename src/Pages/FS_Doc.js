@@ -21,6 +21,8 @@ import Firestore_Listener, { getCounter } from '../functions/Firestore_Listener.
 import GoogleMaps from '../elements/GoogleMaps.tsx';
 import { useAuth } from '../authContext/AuthProvider.js';
 import Predict from './predict.js';
+import Doc from './Doc.js';
+import Editor from './admin.js';
 
 
 function FS_Doc() {
@@ -34,13 +36,6 @@ function FS_Doc() {
   //const counterVal = 10;
   //const { tempArray, humidArray } = Firestore_Listener(docPath2, "user20@gmail.com", "password5");
 
-
-  const Doc = () => {
-    return(
-    <>
-    <p>This page is a work in progress.</p>
-    </>)
-  }
 
   // Overview of flooding
   const  Overview = () => {
@@ -78,18 +73,13 @@ function FS_Doc() {
     return(
       <>
       {!userLoggedIn && <h1>Please note: This page may take some time to load for the first time.</h1>}
-      
-      <Module type="title" title="2D Maps Represention of 'Pools' of Flooding at SHS"></Module>
+      <Module type="directory-fas"/>
       <Module type="text">
-        <h2>The 2D embedded Google maps display below highlights areas of flooding in <b>blue polygons.</b> The larger/more dense the pools are,
-        the more flooding there is.</h2>
-        <br/>
-        <p>Other Quick Links:</p>
-        <a className="link" href="/advisorysystem/3dmap-warning">3D Map Display</a><br/>
-        <a className="link" href="/advisorysystem/predict">Flooding Prediction Calculator</a>
-        <br/><br/>
         <b>Please note that it may take some time to load depending on the severity of the flooding level.</b>
         <p>Don't know what this page or system is? Scroll down or <a className="link" href="#resources">click here.</a></p>
+        <br/>
+        <p style={{background: "orange", padding: "10px", borderRadius: "4px"}}>The 2D embedded Google maps display below highlights areas of flooding in <b>blue polygons.</b> The larger/more dense the pools are,
+        the more flooding there is.</p>
       </Module>
       
       {mapDisconnect && <p style={{color: "white", textAlign: "center", backgroundColor: "red"}}><b>There has been a change in the data of the maps display you are currently being shown.
@@ -99,7 +89,7 @@ function FS_Doc() {
       <br/><br/>
       <Module type="main" title="Technical Data">
 
-      <div className="stat_grid" id="resources">
+      <div className="stat_grid">
 
         <div>
           <div className="bignumber">
@@ -117,9 +107,9 @@ function FS_Doc() {
 
         <div>
         <div className="bignumber">
-          {lastHumidVal}%
+          {counterVal * 0.0842 /* 0.08422256 = conversion from counter to in rainfall*/} inches
           </div>
-          Last Humidity Measure
+          Accumulated Rainfall
         </div>
 
         <div>
@@ -136,13 +126,20 @@ function FS_Doc() {
           Next Update Time
         </div>
 
+        <div>
+        <div className="bignumber">
+          {lastHumidVal}%
+          </div>
+          Last Humidity Measure
+        </div>
+
       </div>
 
       </Module>
 
       <br/>
       <Module type="text">
-        <h1 style={{fontSize: "200%"}}>About the Flood Advisory System</h1>
+        <h1 id="resources" className="scrollpadding" style={{fontSize: "200%"}}>About the Flood Advisory System</h1>
         <br/>
         <b>What is it?</b>
         <p>In late 2023, we sought to find a way to inform faculty and students alike of flooding at Scarsdale High School so we can all get to school and go home safely. We wanted to measure rainfall live onsite and upload this to a website where we can display the rainfall in a visual manner, easily accessible on a website.</p>
@@ -152,7 +149,13 @@ function FS_Doc() {
         <p>A little over a year in the making, we have finished version one of our system.</p>
         <br/>
         <b>How does it work?</b>
-        <p>Vist our <a className="link" target="_blank" href="https://github.com/Community-Engineers-Club/cecwebsite_v2">GitHub</a> to see our code or read more <b>in the following section</b> to get a jist of how it works. See below to learn how the google maps page above is generated and the thought process behind it.</p>
+        <p>There are three ways to learn how it works:
+          <br/>1. Vist our <a className="link" target="_blank" href="https://github.com/Community-Engineers-Club/cecwebsite_v2">GitHub</a> to see our code
+          <br/>2. Read the <a className="link"  href="/advisorysystem/documentation#2dgoogle_doc">documentation.</a>
+          <br/>3. Read more in <b>the following section</b> to get a jist of how it works and the thought process behind it.
+
+
+        </p>
         <br/>
         <b>This is a cool club! How can I join?</b>
         <p>We'd love to have you join us! To learn more about us and join our group me, <a className="link" href="#footer">click here.</a></p>
@@ -176,7 +179,7 @@ function FS_Doc() {
            These minimums are surrounded by increasing elevation that fills with water as it rains more. We want to know the points of these 'pools' and to display the parts of the pools
            filled with water. Ultimately, we end up drawing blue polygons of pools, with each vertex of the polygon being a part of the filled pool, on a Google Maps interface.
         </p>
-        <br/>
+        <br/><p>Read more in the respective documentation section: <a href="/advisorysystem/documentation#2dgoogle_doc" className="link">here.</a></p>
         <p>To see the technical details of <b>how this all works exactly</b>, feel free to read our code on Github: <a className="link" target="_blank" href="https://github.com/Community-Engineers-Club/cecwebsite_v2">https://github.com/Community-Engineers-Club/cecwebsite_v2</a></p>
 
       </Module>
@@ -188,6 +191,7 @@ function FS_Doc() {
     return(
       <>
       <Module type="title" title="3D Rendering of Water Level at Scarsdale High School"></Module>
+      <Module type="directory-fas"/>
       <Module type="text"><b>Warning: File loading is 80 MB</b></Module>
       <Module type="text">This model is an <i>approximate</i> representation of the water level at Scarsdale High School based on rain measurements taken onsite.</Module>
       <Module type="text"><b>How to use: </b>Use scroll wheel or fingers to zoom in and out and rotate the model.</Module>
@@ -199,9 +203,18 @@ function FS_Doc() {
         <br/>
         <p>This map is able to be shown because of a library that allows 3D models to be embedded and edited by functions. The 3D model was created using a Google Maps API and modified in Blender to fit for displaying on a website.</p>
         <br/><p>The gray plane's height is controlled by a function that maps each increase in counter to an increase in height of the gray plane. The conversion factor has been determined by comparing real precipitation data and images.</p>
-        <br/><p>To see the technical details of <b>how this all works exactly</b>, feel free to read our code on Github: <a className="link" target="_blank" href="https://github.com/Community-Engineers-Club/cecwebsite_v2">https://github.com/Community-Engineers-Club/cecwebsite_v2</a></p>
+        <br/><p>Read more in the respective Documentation section: <a href="/advisorysystem/documentation#3drendering_doc" className="link">here.</a></p>
+        <p>To see the technical details of <b>how this all works exactly</b>, feel free to read our code on GitHub: <a className="link" target="_blank" href="https://github.com/Community-Engineers-Club/cecwebsite_v2">https://github.com/Community-Engineers-Club/cecwebsite_v2</a></p>
 
       </Module>
+      </>
+    )
+  }
+
+  const map_2d = () => {
+    return(
+      <>
+      <GoogleMaps/>
       </>
     )
   }
@@ -209,20 +222,10 @@ function FS_Doc() {
   const warning_map = () => {
     return(
       <>
+      <Module type="directory-fas"/>
       <Module type="text"><b>Warning: 3D rendering file is 80 MB (megabytes).<br/><br/>This may  take some time to load. This may be intensive and slow down some devices. Speed of download is dependent upon internet connection.</b></Module>
-      <Module type="text"><b>Are you sure you want to continue?</b><br/><br/><a href="/advisorysystem/3dmap" style={{textDecoration: "none", color: "green"}}>Yes</a>      
-      <br/><br/><a style={{textDecoration: "none", color: "red"}} href="/">No, take me home!</a></Module>
-      </>
-    )
-  }
-
-  const history = () => {
-    return(
-      <>
-      <Module type="title" title="History has yet to be written. Coming soon."></Module>
-      <br/>
-      <Module type="image" src="/Images/celogo.png" width="30%" position="center"></Module>
-      <br/><br/>
+      <Module type="text"><b>Are you sure you want to continue?</b><br/><br/><a href="/advisorysystem/3dmap" className="yes_btn">Yes</a>      
+      <a className="no_btn" href="/">No</a></Module>
       </>
     )
   }
@@ -239,10 +242,12 @@ function FS_Doc() {
         return show_map()
       case "3dmap-warning":
         return warning_map()
-      case "history":
-        return history()
       case "predict":
         return Predict()
+      case "editor":
+        return Editor()
+      case "2dmap":
+        return map_2d()
       default:
         return <h1>An error has occured.</h1>
     }

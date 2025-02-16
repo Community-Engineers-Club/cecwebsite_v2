@@ -53,11 +53,11 @@ return(
             <a className="page">Flood Advisory System &#x25BE;</a>
             <div className="dropdown-content">
                 <a href="/advisorysystem/overview">Overview</a>
-                <a href="/advisorysystem/predict">Flooding Prediction Calculator</a>
                 <a href="/advisorysystem/3dmap-warning">3D Map</a>
+                <a href="/advisorysystem/predict">Flooding Prediction Calculator</a>
                 <div style={{width: "90%", height: "1px", background: "lightgray", justifySelf: "center"}}></div>
                 <a href="/advisorysystem/documentation">Documentation</a>
-                <a href="/editor">Admin Panel</a>
+                <a href="/advisorysystem/editor">Admin Panel</a>
             </div>
         </div>
             <a className="page" href="#footer">Join</a>

@@ -341,7 +341,19 @@ function binarySearch_2d(array, value, col_position) {
   return -1;
 }
 
-// Download CSV
+// Download file
+export function downloadFile(fileUrl, filename="data.csv"){
+    // Create a temporary link to download the file
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log("File downloaded.")
+}
+
+// Download CSV + conversion
 export function downloadCSV(data, filename="data.csv"){
   try {
     // Format data into 2D array before parsing

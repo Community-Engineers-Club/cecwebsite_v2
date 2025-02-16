@@ -5,13 +5,13 @@ import Footer from '../elements/Footer.js';
 import Module from '../elements/Module.js';
 import './styling/Home.css';
 
-
 function Home() {
 
   return (
     <>
     <Navbar/>
 
+{/*
 <div style={{background: "linear-gradient(to right, rgb(244, 5, 5), rgb(244, 5, 128))", padding: "5px",
   paddingTop: "10px",
   paddingBottom: "10px",
@@ -22,7 +22,7 @@ function Home() {
   <a style={{textDecoration: "none", color: "yellow"}}href="/advisorysystem/overview">Click here!</a>
 
   </p>
-</div>
+</div> */}
 
 
 <section className="widget" style={{backgroundImage: "url('/Images/adsystem.jpeg')"}}>
@@ -46,8 +46,11 @@ function Home() {
   }}>The Community Engineers Club</h1>
 </div> */}
 
-<br/><br/>
-
+<div style={{marginTop: "2px", marginBottom: "2px"}}>
+<a href="#footer" style={{textDecoration: "none", color: "white"}}>
+  <p style={{ borderRadius: "4px", textAlign: "center", width: "100%", margin: "auto", background: "rgb(27, 126, 225)"}} href="#footer">&#9660;</p>
+</a>
+</div>
 
 
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -7,14 +7,9 @@ import Firestore_Listener from '../functions/Firestore_Listener';
 
 const ModelViewer = ( {custom_counter} ) => {
 
-  let counterVal;
 
-  if (custom_counter) {
-    counterVal = custom_counter;
-    console.log("Custom counter! ", custom_counter);
-  } else {
-    counterVal = Firestore_Listener("arduino/post").counterVal;
-  }
+    // get counter from database - if necessary
+    const { counterVal }  = Firestore_Listener("arduino/post")
 
     // Refs to store the scene, camera, renderer, controls, and adjustable part
     const containerRef = useRef(null);
@@ -22,7 +17,8 @@ const ModelViewer = ( {custom_counter} ) => {
     const cameraRef = useRef(null);
     const rendererRef = useRef(null);
     const controlsRef = useRef(null);
-    const adjustablePartRef = useRef(null);
+    //const adjustablePartRef = useRef(null);
+    const [adjustablePartRef, setAdjustablePartRef] = useState(null);
 
   useEffect(() => {
     // Initialize the scene only once 
@@ -33,7 +29,7 @@ const ModelViewer = ( {custom_counter} ) => {
     cameraRef.current = camera;
     
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth / 1.2, window.innerHeight / 1.2);
+    renderer.setSize(window.innerWidth / 1.1, window.innerHeight / 1.2);
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -56,7 +52,8 @@ const ModelViewer = ( {custom_counter} ) => {
     loader.load('/Models/shs2.glb', (gltf) => {
         const model = gltf.scene;
         scene.add(model);
-        adjustablePartRef.current = model.getObjectByName('adjustable');
+       // adjustablePartRef.current = model.getObjectByName('adjustable');
+       setAdjustablePartRef(model.getObjectByName('adjustable'));
       },
       undefined,
       (error) => {
@@ -75,13 +72,23 @@ const ModelViewer = ( {custom_counter} ) => {
 
   // Update the adjustable part position when slider value changes
   useEffect(() => {
-    let slider = counter_3D_conversion(parseInt(counterVal));
-    const { current: adjustablePart } = adjustablePartRef;
-    if (adjustablePart) {
-      adjustablePart.position.y = slider;
+    let temp_counter = 0;
+    if (custom_counter) {
+      temp_counter = custom_counter;
+    } else {
+      console.log("does not exist. countval: ", counterVal)
+      temp_counter = counterVal;
     }
-console.log("rendered. Counter: ", counterVal, "slider: ", slider);
-  }, [counterVal]); // This effect runs whenever counterVal change
+
+    let slider = counter_3D_conversion(parseInt(temp_counter));
+    //const { current: adjustablePart } = adjustablePartRef;
+    const adjustablePart = adjustablePartRef;
+    if (adjustablePart) {
+      console.log("slider value: ", slider);
+      adjustablePart.position.y = slider;
+    } else console.log("part does not exist.")
+
+  }, [counterVal, adjustablePartRef]); // This effect runs whenever counterVal change
 
   // Animation loop (runs continuously)
   useEffect(() => {
@@ -111,7 +118,8 @@ console.log("rendered. Counter: ", counterVal, "slider: ", slider);
       //Styling
       style={{ display: 'flex', 
       justifyContent: 'center',
-      alignItems: 'center'}}/>
+      alignItems: 'center',
+      }}/>
 
     </div>
     </>

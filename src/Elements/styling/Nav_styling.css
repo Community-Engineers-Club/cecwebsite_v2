@@ -36,8 +36,8 @@ General Navbar Layout
     background: rgba(5, 14, 48, 0.9);
     padding-left: 5%;
     padding-right: 5%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 
     display: flex;
     align-items: center;
@@ -73,7 +73,6 @@ General Navbar Layout
 .dropdown-content{
     position: absolute;
 
-    margin-top: 10px;
     margin-left: 15px;
     display: none;
     width: 210px;

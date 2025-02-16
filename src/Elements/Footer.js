@@ -14,11 +14,11 @@ return(
 </div>
 
 <div style={{ maxWidth: "900px", lineHeight: "1.5"}}>
-  <p><b>The Community Engineers Club </b>is a non-competitive collaborative environment, encouraging people of various interests (ranging from art to programming) to meet and utilize their skill sets to create products for the school, local community, and beyond. We wanted to offer an alternative option (as the only other engineering club was the Robotics club) for students interested in engineering to really get a chance to explore the field.</p>
+  <p><b>The Community Engineers Club </b>is a non-competitive collaborative environment, encouraging people of various interests (ranging from art to programming) to meet and utilize their skill sets to create products for the school, local community, and beyond. We wanted to offer an option for students interested in engineering — or maybe even unsure — to really get a chance to explore the field freely.</p>
 </div>
 
 <br/>
-<b>wednesdays 3PM @ the design lab</b>
+<b>wednesdays 3pm @ the design lab</b>
 <br/>
 <div className="footerbar"></div>
 <br/>

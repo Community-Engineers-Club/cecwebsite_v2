@@ -171,7 +171,7 @@ const GoogleMaps = ( {custom_counter} ) => {
   }, [userLoggedIn]); // Runs only once when the component mounts
 
 return(
-<div style={{width: '80%', aspectRatio: '1.66', margin: 'auto'}}>
+<div style={{width: '100%', aspectRatio: '1.66', margin: 'auto'}}>
   {mapLoaded && userLoggedIn ? (
  <APIProvider apiKey={apiKeys} onLoad={() => console.log('Maps API has loaded.')}>
    <Map
