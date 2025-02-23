@@ -26,7 +26,7 @@ const Doc = () => {
     <>
     <Module type="directory-fas"/>
 
-<div style={{display: "flex"}}>
+<div style={{display: "flex", justifyContent: "center"}}>
     <section className="doc_contents"style={{width: "40%"}}>
       <Module type="table_contents-long">
       <li><a className="link" href="#">Top</a></li>
@@ -34,6 +34,7 @@ const Doc = () => {
       <ul>
         <li>Page Overview</li>
         <li>Advisory System Overview</li>
+        <li><a href="#summary_doc">Summary: How everything works</a></li>
       </ul>
       </li>
         <li><a className="link" href="#system_doc">System Components & Files</a>
@@ -54,6 +55,7 @@ const Doc = () => {
         
         <ul>
         <li>Overview</li>
+        <li><a href="#device_running_doc">Important: How to ensure the device is running properly</a></li>
         <li><a href="#interior_doc">Interior: Images and Electrical Wiring</a></li>
         <li><a href="#exterior_doc">Exterior: Images & Video</a></li>
         <li><a href="#assembly_doc">Assembly Process</a></li>
@@ -63,12 +65,15 @@ const Doc = () => {
         <li><a className="link" href="#psoftware_doc">Physical Device Software Guide</a>
         <ul>
         <li>Overview</li>
+        <li><a href="#uploadcode_doc">Uploading code to Arduino</a></li>
           <li><a href="#arduino_doc">Arduino Code Guide</a></li>
         </ul>
         </li>
         <li><a className="link" href="#web_doc">Website Code Guide</a>
         <ul>
           <li>How to approach this section</li>
+          <li><a href="#commandtutorial_doc">Intro to Firebase and Git Commands Tutorial</a></li>
+          <li><a href="#rainconversions_doc">Rainfall Conversion Calculations</a></li>
           <li><a href="#dataretrieval_doc">Data Retrieval</a></li>
           <li><a href="#2dgoogle_doc">2D Google Maps Visualization</a></li>
           <li><a href="#3drendering_doc">3D Rendering Visualization</a></li>
@@ -82,12 +87,12 @@ const Doc = () => {
       
       <section>
       <Module type="text" id="resources">
-      <p>V1.0.1</p>
+      <p>V1.0.3</p>
+      <br/>
+      <p>QUICK! How can I learn how everything works fast!?! Follow <a className="link" href="#summary_doc">this tutorial.</a></p>
       <br/>
       <b>Please excuse any spelling mistakes or minor errors! This page is long and took a long time to make, so please have sympathy. :)</b>
       <br/><br/>
-      <p>Also, this page is <b>not</b> mobile-user friendly. Please view on a computer.</p>
-      <br/>
         <h1 id="introduction_doc" className="scrollpadding" style={{fontSize: "200%"}}>Introduction</h1>
         <br/>
         <b>Page Overview</b>
@@ -110,6 +115,24 @@ const Doc = () => {
        it functions and algorithms to interpret the data from the database along with other variables, modify the data in the database, and ultimately display the flooding level. <i>Please read more in the respective section.</i>
         </p>
 
+      <br/>
+
+      <p>
+      <b id="summary_doc" className="scrollpadding">Summary: How everything works</b>
+      <br/>tl;dr it's a lot lol.
+      <br/><br/>It's probably easiest to proceed reading the following sections in this order to understand the flow of everything.
+      Note that it would literally be too much work to explain everything to the finest detail, so we can't write how the authentication works, how the page generations work,
+      or about the technical details of the polygon displays on the google maps, etc. You'd have to figure that out on your own, but we can share the jist of how the algorithm works and you can
+      go from there!
+      <br/><br/>1. <a className="link" href="#introduction_doc">Advisory System Overview</a> - Step 0: Learn the general layout of the system.
+      <br/><br/>2. <a className="link" href="#psoftware_doc">Physical Device Software Guide</a> - Step 1: the physical device. Learn how data is collected and sent by the Arduino online.
+      <br/><br/>3. <a className="link" href="#physical_doc">Physical Device System Guide b-e.</a> - Step 2: Learn the wiring, organization of the physical device. Learn how it physically looks and works.
+      <br/><br/>4. <a className="link" href="#pdas_doc">Physical Device Additional Supplies</a> - Step 3: Now that you know how the physical device looks, read more into the specific components. Learn everything involved and a description on their purpose.
+      <br/><br/>5. <a className="link" href="#dataretrieval_doc">Website Code Guide - IN ORDER!!</a> - Step 4: Read the rest of the chapter in order from c to i. Here, you will learn the steps from obtaining the data to connecting the geographic data and counter data from the device and to displaying the visuals.
+      Also, you will learn how to post any code changes if you want. Each section in the chapter builds off one another.
+
+
+      </p>
 
 
 
@@ -132,7 +155,7 @@ const Doc = () => {
         <a className="link" href="https://gis.ny.gov/nys-dem" target="_blank">https://gis.ny.gov/nys-dem</a></p>
         
         <p><b>QGIS:</b>
-        <br/>An geographical information system (GIS) used to extract 180,000 datapoints from the SHS digital elevation model into a parsable (readable) friendly format: a CSV File (comma separated file).<br/><br/>
+        <br/>An geographical information system (GIS) used to extract 170,000 datapoints from the SHS digital elevation model into a parsable (readable) friendly format: a CSV File (comma separated file).<br/><br/>
           <a className="link" href="https://qgis.org/" target="_blank">https://qgis.org/</a></p>
 
         <p><b>Google Firebase:</b>
@@ -240,12 +263,15 @@ const Doc = () => {
         It is also used to cover any dangerously exposed wires and group wires together.<br/><br/>
         </p>
 
-        <p><b>GLUE A</b>
-        <br/>text<br/><br/>
+        <p><b>Silicone Glue</b>
+        <br/>A water resistant polymer glue that has some degree of flexibility.
+        This was used to glue the solar panel to the top of the interior of the lid and allow for flexibility as temperature varies from hot to cold throughout the seasons.
+        It is also possible to rip the glue in half without destroying the region if you need to replace the solar panel.<br/><br/>
         </p>
 
-        <p><b>GLUE B</b>
-        <br/>text<br/><br/>
+        <p><b>2-Component Glue</b>
+        <br/>A strong chemically-bonded glue. This was used to bind the rain gauge rails to the side of the electronic enclosure. We used a very strong glue to ensure that the rails
+        remain strongly intact for years to come.<br/><br/>
         </p>
       </div>
 
@@ -331,13 +357,43 @@ const Doc = () => {
       </p>
 
       <br/><br/>
+      <b id="device_running_doc" className="scrollpadding">Important: How to ensure the device is running properly</b>
+      <p>Sometimes, it can be a bit tricky to make sure that all the components are functioning and communicating properly. The main issue typically has to due with power.</p>
+      <br/>To see if the Arduino is working properly, check the <b>lights emitted</b> from the device. Here are the scenarios:
+      <br/><br/><b>1. No lights emitted.</b><br/>No power is received by the Arduino.Solution: check the USB plug and if there is a power source.<br/>
+      
+      <img src="/Documentation/no_power.jpeg" style={{alignSelf: "center", width: "50%"}}></img>
+
+      <br/><br/><b>2. 1 green light in the top right corner and a RGB blue-purple-red or some combination in the central upper half of the device (see orange arrows below). It can be flashing or stable.</b>
+      <br/>This is the most common and trickest issue. This situation means that the Arduino receives power, but not enough or not consistently. To solve it, ensure that it is properly plugged in and that the batteries
+      are in place. Here are the recommended steps to try to fix it. If this doesn't work, you made need to look more into other underlying issues.
+      <br/><br/>a. Check the voltage of the batteries and ensure they are above 3.5V. The lower the voltage and close to 3V they are, the less power they have. It could not be receiving enough power because the batteries
+      do not have much stored energy left.
+      <br/><br/>b. Press and hold grey 'reset' button to the left of the rgb light for 3 seconds (circled in orange). Sometimes the system just needs a reset.
+      <br/>
+      <img src="/Documentation/bad_arduino.jpeg" style={{alignSelf: "center", width: "50%"}}></img>
+
+      <br/><br/><b>3. 1 green light in the top right corner only.</b><br/>This is the ideal scenario! Everything is working!
+
+      <br/>
+      <img src="/Documentation/working_arduino.jpeg" style={{alignSelf: "center", width: "50%"}}></img>
+      <p>1. Note that what's circled in orange should also be green. This shows how power is being directed from the battery to the Arduino. If the Arduino is working properly, this also is.
+        <br/><br/>2. Note also that there is an LED next to a label 'ON' circled in the light blue circle. It is currently off, but will turn red if the solar power manager is receiving electricity
+        from the solar panel!
+      </p>
+
+      <br/><br/><p style={{fontFamily: "monospace"}}>Only once you have scenario #3, is everything working properly! Double check that outputs are being registered by putting a magnet in front of the magnetic sensor
+        and checking the database for updates!
+      </p>
+
+      <br/><br/>
       <b id="interior_doc" className="scrollpadding">Interior: Images and Electrical Wiring</b>
       <p>Detailed look inside of the electrical box. It may look a bit messy and complicated, but this image is still very informative.</p>
       <img src="/Documentation/Inside_Cabinet.jpeg" style={{alignSelf: "center", width: "100%"}}></img>
 
       <br/><br/>
       
-      <p style={{textAlign: "center"}}>Schmatic drawing of the electrical wiring</p>
+      <p style={{textAlign: "center"}}>Schematic drawing of the electrical wiring</p>
       <p style={{textAlign: "center"}}><a className="link" target="_blank" href="/Documentation/schematic.pdf">Open in new tab</a></p>
       <object style={{display: "block", margin: "auto", width: "85%", aspectRatio: "1/1"}} data="/Documentation/schematic.pdf"></object>
 
@@ -405,8 +461,26 @@ const Doc = () => {
         <br/>3. The Arduino reads the temperature and humidity from the DHT11.
         <br/>4. The Arduino attempts to upload to the database. If it takes too long or fails too many times it will return to deep sleep and try again later.
         <br/>5. Return to deep sleep. Process starts all over again.
+        <br/><br/><b>IMPORTANT SIDE NOTE: </b> The Arduino will also regularly attempt to ping the database every <b>8</b> hours. It will provide the time of the ping as well as the temperature and humidity. Each ping should
+        happen at the time of the <span style={{fontFamily: "monospace"}}>nextUpdate</span> attribute that you can find in the database and Statistics section on the Overview page. This helps to monitor that the device is working throughout the day everyday as it should.
+      </p>
+
+
+      <br/>
+
+      <p>
+      <b id="uploadcode_doc" className="scrollpadding">Uploading code to Arduino</b>
+      <br/>The Arduino Support Guide for uploading your new, improved code sketches to Arduino is <a className="link" target="_blank" href="https://support.arduino.cc/hc/en-us/articles/4733418441116-Upload-a-sketch-in-Arduino-IDE">here.</a>
+      <br/>
+      <br/>Some other things to note:
+      <br/>1. Make sure you installed all code libraries for the 2 extra Arduino libraries linked in the <a className="link" href="#alinks_doc">Arduino-related Links</a> section.
+      <br/>2. Make sure the WiFi user and password is correct and that all variables --especially the user email to connect the device to the database-- are correct.
+      <br/>3. Be careful when disconnecting the USB-A from the solar panel controller to your computer and when connecting it again. Treat the device as if it's delicate, because it is!
+
+
       </p>
       <br/>
+
       <b id="arduino_doc" className="scrollpadding">Arduino Code Guide</b>
       <p>Reading the a. part of this section should be sufficient to understanding the code. It is well commented as well.</p>
       <p style={{textAlign: "center"}}><a className="link" target="_blank" href="/Documentation/Arduino.pdf">Open in new tab</a></p>
@@ -421,6 +495,114 @@ const Doc = () => {
         What is possible to lessen the learning curve, I think, is to explain core parts of the system / algorithm and reference which files are involved. That's exactly what
         is going to happen in this section. Please reference the GitHub alongside this guide.
       </p>
+
+      <br/>
+
+      <p>
+      <b id="commandtutorial_doc" className="scrollpadding">Intro to Firebase and Git Commands Tutorial</b>
+        <br/>To deploy your code edits onto the live website and post them on the public repository, there are some commands that you should to know to accomplish this. Hopefully, this section should save you a lot of time!
+        <br/><br/>Useful Firebase/Terminal Commands - for testing and publishing your changes:
+        <div className="code_like">
+          <p><b>npm start</b>
+          <br/>Starts the testing environment. Launches a demo version of the website in your browser at localhost:3000.
+          </p>
+
+          <p><b>'control' + 'c' (for mac)</b>
+          <br/>Ends your current line in the terminal and jumps to a new command. This is how you will end your testing environment. 
+          </p>
+
+          <p><b>npm run build</b>
+          <br/>Compresses your code and puts it in a 'build' directory, read to be published online. (1/2 to publish)
+          </p>
+
+          <p><b>firebase deploy —only hosting:communityengineers</b>
+          <br/>Deploys the 'build' directory online to the Firebase project at the domain 'communityengineers.web.app' (2/2 to publish)
+          </p>
+
+          <p><b>Firebase deploy --only functions</b>
+          <br/>Deploys the cloud scheduling functions located in the functions &gt;&gt; index.js (not the one in the 'src' folder).
+          These functions help to automatically decrement the counter with time to simulate evaporation.
+          </p>
+        </div>
+        <br/><br/>Useful Git Commands - for publicizing your code changes:
+        <div className="code_like">
+          <p><b>git status</b>
+          <br/>Check the status of edited files.
+          </p>
+
+          <p><b>git add *</b>
+          <br/>Pushes all of your edited code files to the git stack ready to commited officially. Change the '*' to the path of specific files if you
+          don't want to push all of your changes.
+          <br/><br/>(1/3 to publicize changes)
+          </p>
+
+          <p><b>git commit -m "TITLE DESCRIPTION HERE"</b>
+          <br/>Commit all files and give a title description on what you have done. You can do it individually by removing the '-m' with the specific file.
+          <br/><br/>(2/3 to publicize changes)
+          </p>
+
+          <p><b>git push</b>
+          <br/>Push the commit online to be visible on the official repository!
+          <br/><br/>(3/3 to publicize changes)
+          </p>
+        </div>
+      </p>
+
+      <br/>
+
+      <p>
+      <b id="rainconversions_doc" className="scrollpadding">Rainfall Conversions: From Rain Gauge to Water Level</b>
+      <p>This section will explain how each rotation of the rain gauge's tipping bucket translates to rainfall and a change in water level.</p>
+      <br/><br/><span style={{fontFamily: "monospace"}}>Theory: </span>When each bucket rotates, that corresponds to it raining <span style={{fontFamily: "monospace"}}>x </span> 
+      m^3 over an area of <span style={{fontFamily: "monospace"}}>y</span> inches^2. Using this data and assuming an even distribution of rainfall, we can determine through conversions
+      how much it rains over a certain area.
+      <div className="code_like">
+        <p><b>Area of top of the water funnel 2D cross section</b>
+        <br/>15.744 in^2
+        </p>
+
+        <p><b>Volume of water in each bucket per tilt</b>
+        <br/>1.326 in^3
+        </p>
+
+        <p><b>Amount of rainfall over 4m^2 area (area of each elevation point) per bucket tilt</b>
+        <br/> 522.181 in^3 or 0.008557 m^3 (using meters because the elevation data retrived from the New York DEM was in meters).
+        </p>
+
+      </div>
+      <br/>
+
+      This is the exact <span style={{fontFamily: "monospace"}}>rainFactor</span> value used in <span style={{fontFamily: "monospace"}}>pool_calulator</span> from <span style={{fontFamily: "monospace"}}>calculator.js </span>
+      to distribute water accumulation over the groups of pools for the <span style={{fontFamily: "monospace"}}>GoogleMaps.tsx</span> display.
+
+      <br/><br/>
+      For the <span style={{fontFamily: "monospace"}}>3D map display, </span> we modeled the <span style={{fontFamily: "monospace"}}>counterFactor </span>
+      from the <span style={{fontFamily: "monospace"}}>counter_3d_conversion</span> function in <span style={{fontFamily: "monospace"}}>calculator.js </span>
+      using real images and data. Here's how:
+      <br/>
+      <br/>1. Note that slider value for the 2D plane to intersect the 3D plane at the default /normal height (aka the height of the water in ther river) is
+      <span style={{fontFamily: "monospace"}}> 23.</span> So therefore, however much the counter value impacts the slider value changing the height of the 2D plane,
+      we must set a shift of <span style={{fontFamily: "monospace"}}>+ 20.</span>
+      <br/>2a. Calibration: take a look at <a className="link" target="_blank" href="/Documentation/recordrainfall_article.pdf">this PDF</a> from an article on record rainfall in Scarsdale. It includes a reference image of flooding at Scarsdale High School
+      on page 2. It claims that this level of flooding coincides with <span style={{fontFamily: "monospace"}}>5.78 inches</span> of rain.
+      <br/>2b. So, we try to find the slider value for the 2D plane to intersect the 3D map at the level the water floods the school in the reference image. We find that the slider value to be
+      <span style={{fontFamily: "monospace"}}>25.</span>
+      <div className="code_like">
+        <p><b>Number of counters corresponding to 5.78 inches of rain</b>
+        <br/>1.326 in^3 / 15.744 in^2 = 0.08422256 in of rain.
+        <br/>The above line finds the number of vertical rainfall by dividing the volume of rain per area.
+        <br/><br/>5.78in / 0.08422256 in = 68.6276932 ≈ 68.
+        <br/>The above line finds how many counters correspond to 5.78 in of rain. We round down to 68 since counters
+        are integers and do not round up.
+        </p>
+      </div>
+
+      <br/>Now, we have the formula: <span style={{fontFamily: "monospace"}}>25 = 23 + 68 * counterFactor</span> where we solve for the counterFactor.
+      Note: yes, we assume the 2d water plane increases constantly through the 3d space. It isn't perfect, but it's the best we can do-- at least to start.
+      <br/><br/>Our answer gives us: <span style={{fontFamily: "monospace"}}>counterFactor = 0.029411764</span>
+
+      </p>
+
       <br/>
 
       <p>
@@ -465,6 +647,9 @@ const Doc = () => {
 
       <p>
         <b id="2dgoogle_doc" className="scrollpadding">2D Google Maps Visualization</b>
+        <div className="code_like">
+          <p>Prerequisite knowledge: <a className="link" href="#dataretrieval_doc">d. Data Retrieval</a> and <a className="link" href="#psoftware_doc">Physical Device Software Guide</a></p>
+        </div>
         <p>This section will explain roughly how to take the <span style={{fontFamily: "monospace"}}>pools</span> and <span style={{fontFamily: "monospace"}}>relmins</span> CSV and convert them into
         a visual 2D represention.</p>
         <br/><b>Files:</b> <span style={{fontFamily: "monospace"}}>GoogleMaps.tsx, calculator.js</span>, and parseCSV function from <span style={{fontFamily: "monospace"}}>dataAnalysis.js</span>
@@ -495,6 +680,9 @@ const Doc = () => {
 
       <p>
         <b id="3drendering_doc" className="scrollpadding" >3D Rendering Visualization</b>
+        <div className="code_like">
+        <p>Prerequisite knowledge: <a className="link" href="#dataretrieval_doc">d. Data Retrieval</a> and <a className="link" href="#psoftware_doc">Physical Device Software Guide</a></p>
+        </div>
         <p>This section will explain how the 3D rendering displays the water level.</p>
         <br/><b>Files: </b><span style={{fontFamily: "monospace"}}>ModelViewer.js</span> and <span style={{fontFamily: "monospace"}}>calculator.js</span>
         <br/><br/>1. An instance of the <span style={{fontFamily: "monospace"}}>ModelViewer.js</span> object is called. The <span style={{fontFamily: "monospace"}}>counter</span> is

@@ -1,15 +1,4 @@
-/*
-
-Commands to deploy:
-1. npm run build
-2. firebase deploy
-
-Command to run local server (with live updates from input):
-npm start
-
-*/
-
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import React from 'react';
 import './App.css';
 import Home from './pages/Home.js'
@@ -18,8 +7,7 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import FS_Doc from './pages/FS_Doc.js';
 import { AuthProvider } from './authContext/AuthProvider.js';
-import GoogleMaps from './elements/GoogleMaps.tsx';
-import Editor from './pages/admin.js';
+import Fullscreen from './pages/Fullscreen.js';
 
 
 function App() {
@@ -33,8 +21,9 @@ function App() {
       <Routes>
         <Route index element={<Home/>}/>
         <Route path ="/advisorysystem/:pageId" element={<FS_Doc/>}/>
+        <Route path ="/advisorysystem" element={<Navigate to="/advisorysystem/overview" replace/>}/>
         <Route path ="*" element={<FS_Doc/>}/>
-        <Route path ="/map" element={<GoogleMaps/>}/>
+        <Route path ="/fullscreen/:pageId" element={<Fullscreen/>}/>
       </Routes>
       </AuthProvider>
     </BrowserRouter>

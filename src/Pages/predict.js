@@ -18,10 +18,12 @@ const  Predict = () => {
     const [display2D, setDisplay2D] = useState(false);
     const [display3D, setDisplay3D] = useState(false);
     const [displaying, setDisplaying] = useState(false);
+    const [fullscreen, setFullScreen] = useState(false);
 
     // Mode
     const [mode, setMode] = useState("normal");
     const [userCounter, setUserCounter] = useState(0);
+    const [userRainfall, setUserRainfall] = useState(0);
 
 
     // Variables
@@ -111,7 +113,7 @@ const  Predict = () => {
     }
 
     function btnLogic() {
-      if ((rainInterval != '' && mode == "normal") || (mode == "experiment"))
+      if ((rainInterval != '' && mode == "normal") || (mode == "counter") || (mode == "rain"))
         return true;
     }
 
@@ -176,9 +178,12 @@ const  Predict = () => {
       console.log("temp rain data: ", tempGraphData)
       
       console.log("whole counter: ", whole_counter, "sim counter: ", sim_counter)
-    } else { // mode == experiment
-      setWholeCounter(userCounter)
+    } else if (mode == "counter"){ // mode == counter
+      setWholeCounter(userCounter);
       setAccumRain(userCounter * 0.08422256);
+    } else if (mode == "rain"){
+      setAccumRain(userRainfall);
+      setWholeCounter(Math.floor(userRainfall / 0.08422256));
     }
     }
 
@@ -211,7 +216,6 @@ const  Predict = () => {
     }
 
     return(
-    <>
     <div style={{marginTop: "20px", marginBottom: "20px"}}>
 
       <Module type="directory-fas"/>
@@ -249,24 +253,34 @@ const  Predict = () => {
             setSliderMax(0);
             setSliderValue(0);
             setSliderText('');
+            setAccumRain(0);
+            setWholeCounter(0);
             }}>
             <option selected value="normal">Normal</option>
-            <option value="experiment">Set Counter</option>
+            <option value="counter">Set Counter</option>
+            <option value="rain">Set Rainfall</option>
           </select>
 
           <br/><br/>
-          {mode == "experiment" && <input
+          {mode != "normal" && <input
           style={{width: "40px", height:"20px"}}
           required
           type="number"
-          value={userCounter}
+          value={ mode == "counter" ? (userCounter): (userRainfall)}
           onChange={(e) => {
 
+            if (mode == "counter") {
             if (e.target.value >= 0 && e.target.value <= 70)
               setUserCounter(e.target.value);
+            } else { // mode =="rain" b/c otherwise this button wouldn't be visible
+              if (e.target.value >= 0 && e.target.value <= 7) // 0-7 inches rain
+                setUserRainfall(e.target.value)
+            }
           
           }}
           />}
+
+          {mode == "rain" && <span> inches</span>}
 
           {mode == "normal" &&
           <select onChange={(e) => { precipOptionChange(e.target.value) }}>
@@ -319,11 +333,8 @@ const  Predict = () => {
 
         </div>
       </div>
-      {/*<p>Whole counter: {wholeCounter}</p>
-      <p>Simulated counter: {simulatedCounter}</p>*/}
 
       {mode == "normal" && <Graph data={rainData}/>}
-      {/*loaded && <GoogleMaps counter={wholeCounter}/>*/}
 
       <div className="center_gradient">
         <div className="center_main">
@@ -368,8 +379,7 @@ const  Predict = () => {
     }
 
     </div>
-      </>
-    )
+)
   }
 
 export default Predict;

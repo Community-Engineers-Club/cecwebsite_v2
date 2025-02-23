@@ -19,7 +19,7 @@ import '../App.css';
       case "predict":
         return "Flooding Prediction Calculator"
       default:
-        return "Home"
+        return ""
     }
 }
 

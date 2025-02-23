@@ -145,8 +145,10 @@ const GoogleMaps = ( {custom_counter} ) => {
       try {
         const api = await getApiKey()
         console.log("api: ", api)
+
         setApis(api)
         setMapLoaded(true);
+
       } catch(error) {
         console.error("Error fetching API key: ", error);
       }

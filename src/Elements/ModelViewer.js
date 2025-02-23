@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { counter_3D_conversion } from '../functions/calculator';
 import Firestore_Listener from '../functions/Firestore_Listener';
 
-const ModelViewer = ( {custom_counter} ) => {
+const ModelViewer = ( {custom_counter, make_fullscreen} ) => {
 
 
     // get counter from database - if necessary
@@ -17,11 +17,11 @@ const ModelViewer = ( {custom_counter} ) => {
     const cameraRef = useRef(null);
     const rendererRef = useRef(null);
     const controlsRef = useRef(null);
-    //const adjustablePartRef = useRef(null);
     const [adjustablePartRef, setAdjustablePartRef] = useState(null);
 
   useEffect(() => {
     // Initialize the scene only once 
+
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
@@ -29,7 +29,11 @@ const ModelViewer = ( {custom_counter} ) => {
     cameraRef.current = camera;
     
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth / 1.1, window.innerHeight / 1.2);
+    if (make_fullscreen) {
+      renderer.setSize(window.innerWidth / 1, window.innerHeight / 1);
+    } else {
+      renderer.setSize(window.innerWidth / 1.1, window.innerHeight / 1.2);
+    }
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 

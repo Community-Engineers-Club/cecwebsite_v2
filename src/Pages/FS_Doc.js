@@ -79,7 +79,11 @@ function FS_Doc() {
         <p>Don't know what this page or system is? Scroll down or <a className="link" href="#resources">click here.</a></p>
         <br/>
         <p style={{background: "orange", padding: "10px", borderRadius: "4px"}}>The 2D embedded Google maps display below highlights areas of flooding in <b>blue polygons.</b> The larger/more dense the pools are,
-        the more flooding there is.</p>
+        the more flooding there is.
+        
+        <br/><br/>
+        <p style={{textAlign: "center"}}><a className="link" target="_blank" href="/fullscreen/2d">Open in full screen</a></p>
+        </p>
       </Module>
       
       {mapDisconnect && <p style={{color: "white", textAlign: "center", backgroundColor: "red"}}><b>There has been a change in the data of the maps display you are currently being shown.
@@ -195,6 +199,7 @@ function FS_Doc() {
       <Module type="text"><b>Warning: File loading is 80 MB</b></Module>
       <Module type="text">This model is an <i>approximate</i> representation of the water level at Scarsdale High School based on rain measurements taken onsite.</Module>
       <Module type="text"><b>How to use: </b>Use scroll wheel or fingers to zoom in and out and rotate the model.</Module>
+      <p style={{textAlign: "center"}}><a className="link" target="_blank" href="/fullscreen/3d">Open in full screen</a></p>
       <ModelViewer/>
       <br/>
 
@@ -249,7 +254,7 @@ function FS_Doc() {
       case "2dmap":
         return map_2d()
       default:
-        return <h1>An error has occured.</h1>
+        return <h1 style={{textAlign: "center", margin: "20px"}}>404 error: page does not exist.</h1>
     }
 
   }

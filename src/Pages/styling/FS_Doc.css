@@ -6,6 +6,10 @@
     }
 }
 
+.doc_contents{
+    max-width: 500px;
+}
+
 .home_body{
     background: rgb(22, 27, 34);
     padding: 20px 0px;
