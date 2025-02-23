@@ -4,7 +4,7 @@ In late 2023, we sought to find a way to inform faculty and students alike of fl
 
 ## What is on this repository?
 
-This repository contains all the code for the club website at [communityengineers.web.app.](https://communityengineers.web.app/);
+This repository contains all the code for the club website at [communityengineers.web.app.](https://communityengineers.web.app/)
 
 That is:
 -The code to display the visual elements of the website.
@@ -13,4 +13,4 @@ That is:
 
 ## Learn More
 
-You can learn more about how to understand this repository and how the system works by visiting our [documentation page.](https://communityengineers.web.app/advisorysystem/documentation);
+You can learn more about how to understand this repository and how the system works by visiting our [documentation page.](https://communityengineers.web.app/advisorysystem/documentation)
